@@ -25,14 +25,14 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
     {
         $threadModel = XenForo_Model::create('XenForo_Model_Thread');
 
-        return !$threadModel->canEditThreadTitle($content, $content, $null);
+        return $threadModel->canEditThreadTitle($content, $content, $null);
     }
 
     protected function _canRevertContent(array $content, array $viewingUser)
     {
         $threadModel = XenForo_Model::create('XenForo_Model_Thread');
 
-        return !$threadModel->canEditThreadTitle($content, $content, $null);
+        return $threadModel->canEditThreadTitle($content, $content, $null);
     }
 
     public function getText(array $content)
