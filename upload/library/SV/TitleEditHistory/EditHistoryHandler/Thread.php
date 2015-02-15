@@ -37,13 +37,13 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
 
     public function getText(array $content)
     {
-        return $content['title'];
+        return htmlspecialchars($content['title']);
     }
 
     public function getTitle(array $content)
     {
         //return new XenForo_Phrase('post_in_thread_x', array('title' => $content['title']));
-        return $content['title']; // TODO
+        return htmlspecialchars($content['title']); // TODO
     }
 
     public function getBreadcrumbs(array $content)
@@ -74,9 +74,7 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
 
     public function formatHistory($string, XenForo_View $view)
     {
-        //$parser = XenForo_BbCode_Parser::create(XenForo_BbCode_Formatter_Base::create('Base', array('view' => $view)));
-        //return new XenForo_BbCode_TextWrapper($string, $parser);
-        return $string; // TODO
+        return htmlspecialchars($string);
     }
 
     public function revertToVersion(array $content, $revertCount, array $history, array $previous = null)
