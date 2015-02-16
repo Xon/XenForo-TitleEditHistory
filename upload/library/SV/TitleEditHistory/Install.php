@@ -57,4 +57,14 @@ class SV_TitleEditHistory_Install
             $db->query('ALTER TABLE `'.$table.'` drop index `'.$index.'` ');
         }
     }
+    
+    public static function renameColumn($table, $old_name, $new_name, $definition)
+    {
+        $db = XenForo_Application::get('db');
+        if ($db->fetchRow('SHOW COLUMNS FROM `'.$table.'` WHERE Field = ?', $old_name) &&
+            !$db->fetchRow('SHOW COLUMNS FROM `'.$table.'` WHERE Field = ?', $new_name))
+        {
+            $db->query('ALTER TABLE `'.$table.'` CHANGE COLUMN `'.$old_name.'` `'.$new_name.'` '. $definition);
+        }
+    }
 }

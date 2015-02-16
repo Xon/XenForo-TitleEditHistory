@@ -82,18 +82,18 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
         $dw = XenForo_DataWriter::create('XenForo_DataWriter_Discussion_Thread', XenForo_DataWriter::ERROR_SILENT);
         $dw->setExistingData($content);
         $dw->set('title', $history['old_text']);
-        $dw->set('edit_count', $dw->get('edit_count') + 1);
-        if ($dw->get('edit_count'))
+        $dw->set('thread_title_edit_count', $dw->get('thread_title_edit_count') + 1);
+        if ($dw->get('thread_title_edit_count'))
         {
-            if (!$previous || $previous['edit_user_id'] != $content['user_id'])
+            if (!$previous || $previous['thread_title_edit_user_id'] != $content['user_id'])
             {
                 // if previous is a mod edit, don't show as it may have been hidden
-                $dw->set('last_edit_date', 0);
+                $dw->set('thread_title_last_edit_date', 0);
             }
-            else if ($previous && $previous['edit_user_id'] == $content['user_id'])
+            else if ($previous && $previous['thread_title_edit_user_id'] == $content['user_id'])
             {
-                $dw->set('last_edit_date', $previous['edit_date']);
-                $dw->set('last_edit_user_id', $previous['edit_user_id']);
+                $dw->set('thread_title_last_edit_date', $previous['edit_date']);
+                $dw->set('thread_title_last_edit_user_id', $previous['edit_user_id']);
             }
         }
 

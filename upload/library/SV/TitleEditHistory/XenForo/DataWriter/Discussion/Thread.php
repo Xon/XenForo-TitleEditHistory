@@ -6,9 +6,9 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
     protected function _getCommonFields()
     {
         $fields = parent::_getCommonFields();
-        $fields["xf_thread"]['last_edit_date'] = array('type' => self::TYPE_UINT, 'default' => 0);
-        $fields["xf_thread"]['last_edit_user_id'] = array('type' => self::TYPE_UINT, 'default' => 0);
-        $fields["xf_thread"]['edit_count'] = array('type' => self::TYPE_UINT_FORCED, 'default' => 0);
+        $fields["xf_thread"]['thread_title_last_edit_date'] = array('type' => self::TYPE_UINT, 'default' => 0);
+        $fields["xf_thread"]['thread_title_last_edit_user_id'] = array('type' => self::TYPE_UINT, 'default' => 0);
+        $fields["xf_thread"]['thread_title_edit_count'] = array('type' => self::TYPE_UINT_FORCED, 'default' => 0);
         return $fields;
     }
 
@@ -16,9 +16,9 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
     {
         if ($this->isUpdate() && $this->isChanged('title'))
         {
-            $this->set('last_edit_date', XenForo_Application::$time);
-            $this->set('last_edit_user_id', XenForo_Visitor::getUserId());
-            $this->set('edit_count', $this->get('edit_count') + 1);
+            $this->set('thread_title_last_edit_date', XenForo_Application::$time);
+            $this->set('thread_title_last_edit_user_id', XenForo_Visitor::getUserId());
+            $this->set('thread_title_edit_count', $this->get('thread_title_edit_count') + 1);
         }
     }
 
