@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="SV_TitleEditHistory" title="Thread Title Edit History" version_string="1.0.3" version_id="10030" url="https://xenforo.com/community/resources/thread-title-edit-history.4043/" install_callback_class="SV_TitleEditHistory_Listener" install_callback_method="install" uninstall_callback_class="SV_TitleEditHistory_Listener" uninstall_callback_method="uninstall">
+<addon addon_id="SV_TitleEditHistory" title="Thread Title Edit History" version_string="1.0.4" version_id="10040" url="https://xenforo.com/community/resources/thread-title-edit-history.4043/" install_callback_class="SV_TitleEditHistory_Listener" install_callback_method="install" uninstall_callback_class="SV_TitleEditHistory_Listener" uninstall_callback_method="uninstall">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties/>
