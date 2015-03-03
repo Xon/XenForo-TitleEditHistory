@@ -20,18 +20,19 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
             $this->set('thread_title_last_edit_user_id', XenForo_Visitor::getUserId());
             $this->set('thread_title_edit_count', $this->get('thread_title_edit_count') + 1);
         }
+        parent::_discussionPreSave();
     }
 
     protected function _discussionPostSave()
     {
         if ($this->isUpdate() && $this->isChanged('title'))
         {
-            $this->_insertEditHistory();
+            $this->_insertTitleEditHistory();
         }
         parent::_discussionPostSave();
     }
 
-    protected function _insertEditHistory()
+    protected function _insertTitleEditHistory()
     {
         $historyDw = XenForo_DataWriter::create('XenForo_DataWriter_EditHistory', XenForo_DataWriter::ERROR_SILENT);
         $historyDw->bulkSet(array(
