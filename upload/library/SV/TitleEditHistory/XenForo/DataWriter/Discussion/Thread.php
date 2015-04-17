@@ -20,7 +20,7 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
             $this->set('thread_title_last_edit_user_id', XenForo_Visitor::getUserId());
             $this->set('thread_title_edit_count', $this->get('thread_title_edit_count') + 1);
         }
-        parent::_discussionPreSave();
+        return parent::_discussionPreSave();
     }
 
     protected function _discussionPostSave()
@@ -29,7 +29,7 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
         {
             $this->_insertTitleEditHistory();
         }
-        parent::_discussionPostSave();
+        return parent::_discussionPostSave();
     }
 
     protected function _insertTitleEditHistory()
