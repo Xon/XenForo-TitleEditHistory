@@ -7,8 +7,8 @@
   <admin_template_modifications/>
   <code_events/>
   <code_event_listeners>
-    <listener event_id="load_class" execute_order="10" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_DataWriter_Discussion_Thread" description="XenForo_DataWriter_Discussion_Thread"/>
-    <listener event_id="load_class" execute_order="10" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_Thread" description="XenForo_ControllerPublic_Thread"/>
+    <listener event_id="load_class" execute_order="4043" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_DataWriter_Discussion_Thread" description="XenForo_DataWriter_Discussion_Thread"/>
+    <listener event_id="load_class" execute_order="4043" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_Thread" description="XenForo_ControllerPublic_Thread"/>
   </code_event_listeners>
   <cron/>
   <email_templates/>
@@ -32,13 +32,13 @@
 </xen:if>]]></template>
   </templates>
   <public_template_modifications>
-    <modification template="message" modification_key="title_edit_history_message" description="Add Title Edit HIstory link (Thread Title in first Post Compat)" execution_order="9000" enabled="1" action="preg_replace">
+    <modification template="message" modification_key="title_edit_history_message" description="Add Title Edit History link (Thread Title in first Post Compat)" execution_order="404300" enabled="1" action="preg_replace">
       <find><![CDATA[#(<p id="pageDescription" class="muted">.*?)(</p>)#si]]></find>
       <replace><![CDATA[$1
 <xen:include template="thread_view_tools_edit_history" />
 $2]]></replace>
     </modification>
-    <modification template="thread_view" modification_key="title_edit_history_thread_view" description="Add Title Edit HIstory link" execution_order="10" enabled="1" action="preg_replace">
+    <modification template="thread_view" modification_key="title_edit_history_thread_view" description="Add Title Edit History link" execution_order="4043" enabled="1" action="preg_replace">
       <find><![CDATA[#(<xen:description>)(.*?)(</xen:description>)#is]]></find>
       <replace><![CDATA[$1$2
 <xen:include template="thread_view_tools_edit_history" />
