@@ -16,7 +16,7 @@ class SV_TitleEditHistory_XenForo_Model_Thread extends XFCP_SV_TitleEditHistory_
             return false;
         }
 
-        if (XenForo_Permission::hasContentPermission($nodePermissions, 'editAnyPost'))
+        if (XenForo_Permission::hasContentPermission($nodePermissions, 'manageAnyThread'))
         {
             return true;
         }
