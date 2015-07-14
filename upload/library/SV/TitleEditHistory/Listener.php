@@ -61,12 +61,6 @@ class SV_TitleEditHistory_Listener
 
     public static function load_class($class, array &$extend)
     {
-        switch($class)
-        {
-            case 'XenForo_ControllerPublic_Thread':
-            case 'XenForo_DataWriter_Discussion_Thread':
-                $extend[] = self::AddonNameSpace.'_'.$class;
-                break;
-        }
+        $extend[] = self::AddonNameSpace.'_'.$class;
     }
 }
