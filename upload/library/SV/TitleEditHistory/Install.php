@@ -57,7 +57,7 @@ class SV_TitleEditHistory_Install
             $db->query('ALTER TABLE `'.$table.'` drop index `'.$index.'` ');
         }
     }
-    
+
     public static function renameColumn($table, $old_name, $new_name, $definition)
     {
         $db = XenForo_Application::get('db');

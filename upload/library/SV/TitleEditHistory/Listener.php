@@ -29,7 +29,7 @@ class SV_TitleEditHistory_Listener
             SV_TitleEditHistory_Install::addColumn('xf_thread','thread_title_last_edit_date', 'int not null default 0');
             SV_TitleEditHistory_Install::addColumn('xf_thread','thread_title_last_edit_user_id', 'int not null default 0');
         }
-        
+
         if ($version < 10010)
         {
             SV_TitleEditHistory_Install::renameColumn('xf_thread','edit_count', 'thread_title_edit_count', 'int not null default 0');
