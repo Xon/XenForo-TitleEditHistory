@@ -10,7 +10,7 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
         $threadModel = XenForo_Model::create('XenForo_Model_Thread');
 
         $thread = $threadModel->getThreadById($contentId, array(
-            'join' => XenForo_Model_Thread::FETCH_FORUM | XenForo_Model_Thread::FETCH_USER,
+            'join' => XenForo_Model_Thread::FETCH_FORUM | XenForo_Model_Thread::FETCH_FORUM_OPTIONS | XenForo_Model_Thread::FETCH_USER,
             'permissionCombinationId' => $viewingUser['permission_combination_id']
         ));
         if ($thread)
