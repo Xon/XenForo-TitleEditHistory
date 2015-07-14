@@ -9,6 +9,7 @@
   <code_event_listeners>
     <listener event_id="load_class" execute_order="4043" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_DataWriter_Discussion_Thread" description="XenForo_DataWriter_Discussion_Thread"/>
     <listener event_id="load_class" execute_order="4043" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_Thread" description="XenForo_ControllerPublic_Thread"/>
+    <listener event_id="load_class" execute_order="4043" callback_class="SV_TitleEditHistory_Listener" callback_method="load_class" active="1" hint="XenForo_Model_Thread" description="XenForo_Model_Thread"/>
   </code_event_listeners>
   <cron/>
   <email_templates/>
@@ -25,7 +26,7 @@
   <route_prefixes/>
   <style_properties/>
   <templates>
-    <template title="thread_view_tools_edit_history" version_id="1" version_string="0.0.1"><![CDATA[<xen:if is="{$thread.thread_title_edit_count} && {$canEditTitle}">
+    <template title="thread_view_tools_edit_history" version_id="1" version_string="0.0.1"><![CDATA[<xen:if is="{$thread.thread_title_edit_count} && {$canViewThreadTitleHistory}">
 	<span class="title_history ToggleTriggerAnchor">
 		<a href="{xen:link threads/TitleHistory, $thread}" class="item control ToggleTrigger title_history" data-cacheOverlay="false"><span></span>{xen:phrase title_history}</a>
 	</span>

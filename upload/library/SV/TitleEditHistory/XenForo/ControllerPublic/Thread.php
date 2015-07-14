@@ -2,6 +2,13 @@
 
 class SV_TitleEditHistory_XenForo_ControllerPublic_Thread  extends XFCP_SV_TitleEditHistory_XenForo_ControllerPublic_Thread
 {
+    protected function _getDefaultViewParams(array $forum, array $thread, array $posts, $page = 1, array $viewParams = array())
+    {
+        $threadModel = $this->_getThreadModel();
+        $viewParams['canViewThreadTitleHistory'] = $threadModel->canViewThreadTitleHistory($thread, $forum);
+        return parent::_getDefaultViewParams($forum, $thread, $posts, $page, $viewParams);
+    }
+    
     public function actionTitleHistory()
     {
         $this->_request->setParam('content_type', 'thread_title');

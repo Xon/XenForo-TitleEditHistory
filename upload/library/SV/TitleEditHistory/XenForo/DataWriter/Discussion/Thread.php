@@ -2,6 +2,17 @@
 
 class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread
 {
+    const OPTION_LOG_EDIT = 'logEdit';
+
+    protected function _getDefaultOptions()
+    {
+        $defaults = parent::_getDefaultOptions();
+
+        $options = XenForo_Application::get('options');
+        $defaults[self::OPTION_LOG_EDIT] = $options->editHistory['enabled'];
+
+        return $defaults;
+    }
 
     protected function _getCommonFields()
     {
@@ -16,9 +27,27 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
     {
         if ($this->isUpdate() && $this->isChanged('title'))
         {
-            $this->set('thread_title_last_edit_date', XenForo_Application::$time);
-            $this->set('thread_title_last_edit_user_id', XenForo_Visitor::getUserId());
-            $this->set('thread_title_edit_count', $this->get('thread_title_edit_count') + 1);
+            if (!$this->isChanged('thread_title_last_edit_date'))
+            {
+                $this->set('thread_title_last_edit_date', XenForo_Application::$time);
+                if (!$this->isChanged('thread_title_last_edit_user_id'))
+                {
+                    $this->set('thread_title_last_edit_user_id', XenForo_Visitor::getUserId());
+                }
+            }
+
+            if (!$this->isChanged('thread_title_edit_count'))
+            {
+                $this->set('thread_title_edit_count', $this->get('thread_title_edit_count') + 1);
+            }
+        }
+        if ($this->isChanged('thread_title_edit_count') && $this->get('thread_title_edit_count') == 0)
+        {
+            $this->set('thread_title_last_edit_date', 0);
+        }
+        if (!$this->get('thread_title_last_edit_date'))
+        {
+            $this->set('thread_title_last_edit_user_id', 0);
         }
         return parent::_discussionPreSave();
     }

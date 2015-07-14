@@ -6,11 +6,12 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
 
     protected function _getContent($contentId, array $viewingUser)
     {
-        /* @var $postModel XenForo_Model_Post */
-        $threadModel = XenForo_Model::create('XenForo_Model_Thread');
+        $threadModel = $this->_getThreadModel();
 
         $thread = $threadModel->getThreadById($contentId, array(
-            'join' => XenForo_Model_Thread::FETCH_FORUM | XenForo_Model_Thread::FETCH_FORUM_OPTIONS | XenForo_Model_Thread::FETCH_USER,
+            'join' => XenForo_Model_Thread::FETCH_FORUM | 
+                      XenForo_Model_Thread::FETCH_FORUM_OPTIONS | 
+                      XenForo_Model_Thread::FETCH_USER,
             'permissionCombinationId' => $viewingUser['permission_combination_id']
         ));
         if ($thread)
@@ -23,15 +24,15 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
 
     protected function _canViewHistoryAndContent(array $content, array $viewingUser)
     {
-        $threadModel = XenForo_Model::create('XenForo_Model_Thread');
+        $threadModel = $this->_getThreadModel();
 
         return $threadModel->canViewThreadAndContainer($content, $content, $null, $content['permissions'], $viewingUser) &&
-               $threadModel->canEditThreadTitle($content, $content, $null, $content['permissions'], $viewingUser);
+               $threadModel->canViewThreadTitleHistory($content, $content, $null, $content['permissions'], $viewingUser);
     }
 
     protected function _canRevertContent(array $content, array $viewingUser)
     {
-        $threadModel = XenForo_Model::create('XenForo_Model_Thread');
+        $threadModel = $this->_getThreadModel();
 
         return $threadModel->canEditThreadTitle($content, $content, $null, $content['permissions'], $viewingUser);
     }
@@ -101,4 +102,14 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
         return $dw->save();
     }
 
+    protected $_threadModel = null;
+
+    protected function _getThreadModel()
+    {
+        if ($this->_threadModel === null)
+        {
+            $this->_threadModel = XenForo_Model::create('XenForo_Model_Thread');
+        }
+        return $this->_threadModel;
+    }
 }
