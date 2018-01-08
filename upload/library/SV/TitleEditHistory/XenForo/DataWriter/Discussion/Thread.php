@@ -17,9 +17,10 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
     protected function _getCommonFields()
     {
         $fields = parent::_getCommonFields();
-        $fields["xf_thread"]['thread_title_last_edit_date'] = array('type' => self::TYPE_UINT, 'default' => 0);
-        $fields["xf_thread"]['thread_title_last_edit_user_id'] = array('type' => self::TYPE_UINT, 'default' => 0);
-        $fields["xf_thread"]['thread_title_edit_count'] = array('type' => self::TYPE_UINT_FORCED, 'default' => 0);
+        $fields["xf_thread"]['thread_title_last_edit_date'] = ['type' => self::TYPE_UINT, 'default' => 0];
+        $fields["xf_thread"]['thread_title_last_edit_user_id'] = ['type' => self::TYPE_UINT, 'default' => 0];
+        $fields["xf_thread"]['thread_title_edit_count'] = ['type' => self::TYPE_UINT_FORCED, 'default' => 0];
+
         return $fields;
     }
 
@@ -49,6 +50,7 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
         {
             $this->set('thread_title_last_edit_user_id', 0);
         }
+
         return parent::_discussionPreSave();
     }
 
@@ -58,18 +60,21 @@ class SV_TitleEditHistory_XenForo_DataWriter_Discussion_Thread extends XFCP_SV_T
         {
             $this->_insertTitleEditHistory();
         }
+
         return parent::_discussionPostSave();
     }
 
     protected function _insertTitleEditHistory()
     {
         $historyDw = XenForo_DataWriter::create('XenForo_DataWriter_EditHistory', XenForo_DataWriter::ERROR_SILENT);
-        $historyDw->bulkSet(array(
-            'content_type' => 'thread_title',
-            'content_id' => $this->getDiscussionId(),
-            'edit_user_id' => XenForo_Visitor::getUserId(),
-            'old_text' => $this->getExisting('title')
-        ));
+        $historyDw->bulkSet(
+            [
+                'content_type' => 'thread_title',
+                'content_id'   => $this->getDiscussionId(),
+                'edit_user_id' => XenForo_Visitor::getUserId(),
+                'old_text'     => $this->getExisting('title')
+            ]
+        );
         $historyDw->save();
     }
 }

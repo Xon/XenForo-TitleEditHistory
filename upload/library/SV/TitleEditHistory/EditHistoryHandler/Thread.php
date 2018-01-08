@@ -8,12 +8,14 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
     {
         $threadModel = $this->_getThreadModel();
 
-        $thread = $threadModel->getThreadById($contentId, array(
-            'join' => XenForo_Model_Thread::FETCH_FORUM | 
-                      XenForo_Model_Thread::FETCH_FORUM_OPTIONS | 
-                      XenForo_Model_Thread::FETCH_USER,
+        $thread = $threadModel->getThreadById(
+            $contentId, [
+            'join'                    => XenForo_Model_Thread::FETCH_FORUM |
+                                         XenForo_Model_Thread::FETCH_FORUM_OPTIONS |
+                                         XenForo_Model_Thread::FETCH_USER,
             'permissionCombinationId' => $viewingUser['permission_combination_id']
-        ));
+        ]
+        );
         if ($thread)
         {
             $thread['permissions'] = XenForo_Permission::unserializePermissions($thread['node_permission_cache']);
@@ -57,15 +59,16 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
         if ($node)
         {
             $crumb = $nodeModel->getNodeBreadCrumbs($node);
-            $crumb[] = array(
-                'href' => XenForo_Link::buildPublicLink('full:threads', $content),
+            $crumb[] = [
+                'href'  => XenForo_Link::buildPublicLink('full:threads', $content),
                 'value' => $content['title']
-            );
+            ];
+
             return $crumb;
         }
         else
         {
-            return array();
+            return [];
         }
     }
 
@@ -104,12 +107,17 @@ class SV_TitleEditHistory_EditHistoryHandler_Thread extends XenForo_EditHistoryH
 
     protected $_threadModel = null;
 
+    /**
+     * @return SV_TitleEditHistory_XenForo_Model_Thread|XenForo_Model_Thread|XenForo_Model
+     * @throws XenForo_Exception
+     */
     protected function _getThreadModel()
     {
         if ($this->_threadModel === null)
         {
             $this->_threadModel = XenForo_Model::create('XenForo_Model_Thread');
         }
+
         return $this->_threadModel;
     }
 }
