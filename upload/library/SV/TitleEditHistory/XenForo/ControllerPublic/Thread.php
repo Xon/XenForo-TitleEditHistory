@@ -21,7 +21,7 @@ class SV_TitleEditHistory_XenForo_ControllerPublic_Thread  extends XFCP_SV_Title
 
     protected function _updateModeratorLogThreadEdit(array $thread, XenForo_DataWriter_Discussion_Thread $dw, array $skip = [])
     {
-        $skip += ['thread_title_last_edit_date', 'thread_title_last_edit_user_id', 'thread_title_edit_count'];
+        $skip = array_merge($skip, ['thread_title_last_edit_date', 'thread_title_last_edit_user_id', 'thread_title_edit_count']);
         parent::_updateModeratorLogThreadEdit($thread, $dw, $skip);
     }
 }
